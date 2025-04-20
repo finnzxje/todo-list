@@ -1,17 +1,17 @@
 function createProject(name) {
-    let todos = [];
-    const addNewTodo = (todo) => {
-        todos.push(todo);
-    }
-    const getTodos = () => {
-        return todos;
-    }
+  let todos = [];
+  const addNewTodo = (todo) => {
+    todos.push(todo);
+  };
+  const getTodos = () => {
+    return todos;
+  };
 
-    return {
-        name,
-        addNewTodo,
-        getTodos,
-    }
+  return {
+    name,
+    addNewTodo,
+    getTodos,
+  };
 }
 
-export default createProject
+export default createProject;
