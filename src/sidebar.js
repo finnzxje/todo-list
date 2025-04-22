@@ -19,15 +19,51 @@ const sidebar = () => {
   addProjectButton.textContent = "Add new project";
   item2.appendChild(addProjectButton);
 
-  items.appendChild(addTaskButton);
-  items.appendChild(addProjectButton);
+  items.appendChild(item1);
+  items.appendChild(item2);
 
   sidebar.appendChild(items);
 
-  const projects = loadProjectsFromStorage();
-
+  loadProjectsFromStorage();
+  loadProjectsToSidebar();
   addTaskButton.addEventListener("click", handleAddTask);
   addProjectButton.addEventListener("click", handleAddProject);
 };
 
-export default sidebar;
+const loadProjectsToSidebar = () => {
+  const sidebar = document.getElementById("sidebar");
+
+  const existingProjectSection = document.getElementById("project-section");
+  if (existingProjectSection) {
+    sidebar.removeChild(existingProjectSection);
+  }
+  const projectSection = document.createElement("div");
+  projectSection.id = "project-section";
+
+  const projectTitle = document.createElement("h2");
+  projectTitle.textContent = "Projects";
+  projectSection.appendChild(projectTitle);
+
+  let projects = loadProjectsFromStorage();
+
+  const projectItems = document.createElement("ul");
+
+  for (const projectName in projects) {
+    const projectItem = document.createElement("li");
+    const projectElement = document.createElement("button");
+
+    projectElement.textContent = projectName;
+
+    projectItems.appendChild(projectItem);
+    projectItem.appendChild(projectElement);
+
+    projectElement.addEventListener("click", () => {
+      projects = loadProjectsFromStorage();
+      console.log(projects[project].getTodos());
+    });
+  }
+  projectSection.appendChild(projectItems);
+  sidebar.appendChild(projectSection);
+};
+
+export { loadProjectsToSidebar, sidebar };

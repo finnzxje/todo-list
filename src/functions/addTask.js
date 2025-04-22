@@ -107,7 +107,7 @@ const handleAddTask = () => {
 
     projects[formData.get("project")].addNewTodo(newTodo);
     addProjectToStorage(projects[formData.get("project")]);
-    console.log(projects[formData.get("project")].getTodos());
+    // console.log(projects[formData.get("project")].getTodos());
 
     document.body.removeChild(overlay);
   });

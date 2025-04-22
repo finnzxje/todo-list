@@ -1,6 +1,6 @@
 import createTodo from "./todo";
 import createProject from "./project";
-import sidebar from "./sidebar";
+import { sidebar } from "./sidebar";
 import "./style/style.css";
 import "./style/form.css";
 

@@ -1,5 +1,6 @@
 import createProject from "../project";
 import createTodo from "../todo";
+import { loadProjectsToSidebar } from "../sidebar";
 
 function loadProjectsFromStorage() {
   if (!localStorage.getItem("projects")) {
@@ -56,8 +57,9 @@ function addProjectToStorage(project) {
   projectNames.add(project.name);
 
   localStorage.setItem("projects", JSON.stringify(Array.from(projectNames)));
-
   localStorage.setItem(project.name, JSON.stringify(project.getTodos()));
+
+  loadProjectsToSidebar();
 }
 
 export { loadProjectsFromStorage, addProjectToStorage };
