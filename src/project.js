@@ -7,10 +7,15 @@ function createProject(name) {
     return todos;
   };
 
+  const getTodoByName = (name) => {
+    return todos[name];
+  };
+
   return {
     name,
     addNewTodo,
     getTodos,
+    getTodoByName,
   };
 }
 

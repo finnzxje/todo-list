@@ -1,8 +1,5 @@
-import calendar from "./img/calendar.png";
-import createTodo from "./todo";
-
-const calendarImg = new Image();
-calendarImg.src = calendar;
+import createTodo from "../todo";
+import { addProjectToStorage, loadProjectsFromStorage } from "../utils/storage";
 
 const handleAddTask = () => {
   if (document.getElementById("todo-form-modal")) {
@@ -50,6 +47,13 @@ const handleAddTask = () => {
       <label for="tag">Tag</label>
       <input type="text" name="tag" placeholder="work, personal, etc.">
     </div>
+
+   <div class="form-group">
+      <label for="project">Project</label>
+      <select name="project" id ="project">
+      </select>
+    </div>
+
     
     <div class="form-actions">
       <button type="button" id="cancel-button" class="cancel-btn">Cancel</button>
@@ -65,6 +69,17 @@ const handleAddTask = () => {
 
   // Append overlay to body
   document.body.appendChild(overlay);
+
+  const projectSelection = document.getElementById("project");
+
+  const projects = loadProjectsFromStorage();
+
+  for (var index in projects) {
+    const option = document.createElement("option");
+    option.innerText = projects[index].name;
+    option.value = projects[index].name;
+    projectSelection.appendChild(option);
+  }
 
   // Close modal when clicking cancel button
   form.querySelector("#cancel-button").addEventListener("click", () => {
@@ -89,7 +104,11 @@ const handleAddTask = () => {
       formData.get("priority"),
       formData.get("tag"),
     );
-    console.log(newTodo);
+
+    projects[formData.get("project")].addNewTodo(newTodo);
+    addProjectToStorage(projects[formData.get("project")]);
+    console.log(projects[formData.get("project")].getTodos());
+
     document.body.removeChild(overlay);
   });
 };

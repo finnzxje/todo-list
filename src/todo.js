@@ -1,6 +1,12 @@
-function createTodo(title, description, dueDate, priority, tag) {
+function createTodo(
+  title,
+  description,
+  dueDate,
+  priority = "Low",
+  tag = null,
+  complete = false,
+) {
   const createdDate = new Date().toString();
-  let complete = false;
   const markComplete = () => (complete = true);
   const getComplete = () => complete;
   return {
@@ -9,6 +15,7 @@ function createTodo(title, description, dueDate, priority, tag) {
     dueDate,
     priority,
     tag,
+    complete,
     markComplete,
     getComplete,
     createdDate,
