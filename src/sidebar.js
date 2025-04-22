@@ -1,4 +1,5 @@
-import handleAddTask from "./functions/tasks";
+import handleAddProject from "./functions/addProject";
+import handleAddTask from "./functions/addTask";
 import createProject from "./project";
 import createTodo from "./todo";
 import { loadProjectsFromStorage, addProjectToStorage } from "./utils/storage";
@@ -25,19 +26,8 @@ const sidebar = () => {
 
   const projects = loadProjectsFromStorage();
 
-  const testTodo = createTodo("test", "test", "2025-05-01", "High", "CAS");
-
-  const test = createProject("test");
-  test.addNewTodo(testTodo);
-  const testTodo2 = createTodo("mamami", "hehe", "2025-05-01", "Low");
-  test.addNewTodo(testTodo2);
-
-  addProjectToStorage(test);
-
-  // console.log(test);
-  // console.log(projects);
-
   addTaskButton.addEventListener("click", handleAddTask);
+  addProjectButton.addEventListener("click", handleAddProject);
 };
 
 export default sidebar;
