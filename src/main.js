@@ -1,8 +1,16 @@
 import { loadProjectsFromStorage, updateTodoToStorage } from "./utils/storage";
 import { format, formatRelative, isPast } from "date-fns";
-import { addProjectToStorage } from "./utils/storage";
+import { addProjectToStorage, deleteProject } from "./utils/storage";
 
-const showProjectTodos = (e) => {
+const clearMain = () => {
+  document.getElementById("main").innerHTML = "";
+};
+
+const showProjectTodos = (projectName) => {
+  if (!localStorage.getItem(projectName)) {
+    return;
+  }
+
   const projects = loadProjectsFromStorage();
 
   const main = document.getElementById("main");
@@ -11,11 +19,11 @@ const showProjectTodos = (e) => {
 
   const header = document.createElement("h2");
   header.classList.add("main-header");
-  header.textContent = projects[e.target.value].name;
+  header.textContent = projects[projectName].name;
 
   div.appendChild(header);
 
-  const todoList = projects[e.target.value].getTodos();
+  const todoList = projects[projectName].getTodos();
   for (const todoIndex in todoList) {
     const todo = todoList[todoIndex];
 
@@ -71,12 +79,20 @@ const showProjectTodos = (e) => {
     div.appendChild(meta);
     checkbox.addEventListener("change", () => {
       todo.complete = true;
-      updateTodoToStorage(e.target.value, todoIndex, todo);
-      showProjectTodos(e);
+      updateTodoToStorage(projectName, todoIndex, todo);
+      showProjectTodos(projectName);
     });
   }
 
+  const deleteProjectButton = document.createElement("button");
+  deleteProjectButton.textContent = "Delete this project";
+
+  deleteProjectButton.addEventListener("click", () => {
+    deleteProject(projectName);
+  });
+
   main.appendChild(div);
+  main.appendChild(deleteProjectButton);
 };
 
-export { showProjectTodos };
+export { showProjectTodos, clearMain };

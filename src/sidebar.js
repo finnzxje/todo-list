@@ -60,7 +60,9 @@ const loadProjectsToSidebar = () => {
     projectItems.appendChild(projectItem);
     projectItem.appendChild(projectElement);
 
-    projectElement.addEventListener("click", showProjectTodos);
+    projectElement.addEventListener("click", (e) =>
+      showProjectTodos(e.target.value),
+    );
   }
   projectSection.appendChild(projectItems);
   sidebar.appendChild(projectSection);

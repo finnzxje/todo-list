@@ -1,5 +1,6 @@
 import createTodo from "../todo";
 import { addProjectToStorage, loadProjectsFromStorage } from "../utils/storage";
+import { showProjectTodos } from "../main";
 
 const handleAddTask = () => {
   if (document.getElementById("todo-form-modal")) {
@@ -115,6 +116,7 @@ const handleAddTask = () => {
     // console.log(projects[formData.get("project")].getTodos());
 
     document.body.removeChild(overlay);
+    showProjectTodos(formData.get("project"));
   });
 };
 

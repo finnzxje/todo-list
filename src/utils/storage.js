@@ -1,12 +1,17 @@
 import createProject from "../project";
 import createTodo from "../todo";
 import { loadProjectsToSidebar } from "../sidebar";
+import { clearMain } from "../main";
 
 const loadProjectsFromStorage = () => {
-  if (!localStorage.getItem("projects")) {
+  if (
+    !localStorage.getItem("projects") ||
+    JSON.parse(localStorage.getItem("projects")).length == 0
+  ) {
     const homeProject = createProject("Home");
     const projectNames = [homeProject.name];
     localStorage.setItem("projects", JSON.stringify(projectNames));
+    localStorage.setItem(homeProject.name, JSON.stringify([]));
     return homeProject;
   }
 
@@ -70,4 +75,28 @@ const updateTodoToStorage = (projectName, todoIndex, todo) => {
   localStorage.setItem(projectName, JSON.stringify(project.getTodos()));
 };
 
-export { loadProjectsFromStorage, addProjectToStorage, updateTodoToStorage };
+const deleteProject = (projectName) => {
+  if (!localStorage.getItem(projectName)) {
+    return;
+  }
+
+  const projectNames = JSON.parse(localStorage.getItem("projects"));
+
+  const index = projectNames.indexOf(projectName);
+  if (index !== -1) {
+    projectNames.splice(index, 1);
+    localStorage.removeItem(projectName);
+    localStorage.setItem("projects", JSON.stringify(projectNames));
+  }
+
+  console.log(projectNames);
+  loadProjectsToSidebar();
+  clearMain();
+};
+
+export {
+  loadProjectsFromStorage,
+  addProjectToStorage,
+  updateTodoToStorage,
+  deleteProject,
+};
