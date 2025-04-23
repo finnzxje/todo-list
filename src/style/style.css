@@ -12,8 +12,9 @@ body {
 ul li {
   display: flex;
   flex-direction: column;
+  list-style: none;
 }
 
-h2 {
+.project-title {
   text-align: center;
 }

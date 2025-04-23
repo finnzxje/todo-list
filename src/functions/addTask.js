@@ -30,7 +30,7 @@ const handleAddTask = () => {
     <div class="form-group">
       <label for="dueDate">Date</label>
       <div class="date-input-container">
-        <input type="date" name="dueDate" required>
+        <input type="date" id="dueDate" name="dueDate" required>
       </div>
     </div>
     
@@ -60,6 +60,11 @@ const handleAddTask = () => {
       <button type="submit" class="submit-btn">Create Task</button>
     </div>
   `;
+
+  // const dueDateForm = document.getElementById("dueDate");
+  const today = new Date().toISOString().split("T")[0];
+  // dueDateForm.min = today;
+  form.querySelector("#dueDate").setAttribute("min", today);
 
   // Append form to modal
   newTaskLayout.appendChild(form);

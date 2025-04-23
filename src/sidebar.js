@@ -3,6 +3,7 @@ import handleAddTask from "./functions/addTask";
 import createProject from "./project";
 import createTodo from "./todo";
 import { loadProjectsFromStorage, addProjectToStorage } from "./utils/storage";
+import { showProjectTodos } from "./main";
 
 const sidebar = () => {
   const sidebar = document.getElementById("sidebar");
@@ -41,6 +42,7 @@ const loadProjectsToSidebar = () => {
   projectSection.id = "project-section";
 
   const projectTitle = document.createElement("h2");
+  projectTitle.classList.add("project-title");
   projectTitle.textContent = "Projects";
   projectSection.appendChild(projectTitle);
 
@@ -53,14 +55,12 @@ const loadProjectsToSidebar = () => {
     const projectElement = document.createElement("button");
 
     projectElement.textContent = projectName;
+    projectElement.value = projectName;
 
     projectItems.appendChild(projectItem);
     projectItem.appendChild(projectElement);
 
-    projectElement.addEventListener("click", () => {
-      projects = loadProjectsFromStorage();
-      console.log(projects[project].getTodos());
-    });
+    projectElement.addEventListener("click", showProjectTodos);
   }
   projectSection.appendChild(projectItems);
   sidebar.appendChild(projectSection);

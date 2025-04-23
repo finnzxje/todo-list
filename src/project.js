@@ -11,11 +11,16 @@ function createProject(name) {
     return todos[name];
   };
 
+  const setTodoByIndex = (index, todo) => {
+    todos[index] = todo;
+  };
+
   return {
     name,
     addNewTodo,
     getTodos,
     getTodoByName,
+    setTodoByIndex,
   };
 }
 

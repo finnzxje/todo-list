@@ -7,7 +7,9 @@ function createTodo(
   complete = false,
 ) {
   const createdDate = new Date().toString();
-  const markComplete = () => (complete = true);
+  const markComplete = () => {
+    complete = true;
+  };
   const getComplete = () => complete;
   return {
     title,

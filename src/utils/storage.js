@@ -2,7 +2,7 @@ import createProject from "../project";
 import createTodo from "../todo";
 import { loadProjectsToSidebar } from "../sidebar";
 
-function loadProjectsFromStorage() {
+const loadProjectsFromStorage = () => {
   if (!localStorage.getItem("projects")) {
     const homeProject = createProject("Home");
     const projectNames = [homeProject.name];
@@ -19,9 +19,9 @@ function loadProjectsFromStorage() {
   });
 
   return projects;
-}
+};
 
-function loadTodosFromProject(project) {
+const loadTodosFromProject = (project) => {
   if (!localStorage.getItem(project.name)) {
     return project;
   }
@@ -41,9 +41,9 @@ function loadTodosFromProject(project) {
   });
 
   return project;
-}
+};
 
-function addProjectToStorage(project) {
+const addProjectToStorage = (project) => {
   if (!project) {
     console.log("This shouldn't be happening");
   }
@@ -60,6 +60,14 @@ function addProjectToStorage(project) {
   localStorage.setItem(project.name, JSON.stringify(project.getTodos()));
 
   loadProjectsToSidebar();
-}
+};
 
-export { loadProjectsFromStorage, addProjectToStorage };
+const updateTodoToStorage = (projectName, todoIndex, todo) => {
+  let project = createProject(projectName);
+  project = loadTodosFromProject(project);
+
+  project.setTodoByIndex(todoIndex, todo);
+  localStorage.setItem(projectName, JSON.stringify(project.getTodos()));
+};
+
+export { loadProjectsFromStorage, addProjectToStorage, updateTodoToStorage };
