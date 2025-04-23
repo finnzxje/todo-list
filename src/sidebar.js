@@ -1,9 +1,8 @@
 import handleAddProject from "./functions/addProject";
 import handleAddTask from "./functions/addTask";
-import createProject from "./project";
-import createTodo from "./todo";
 import { loadProjectsFromStorage, addProjectToStorage } from "./utils/storage";
 import { showProjectTodos } from "./main";
+import { deleteProject } from "./utils/storage";
 
 const sidebar = () => {
   const sidebar = document.getElementById("sidebar");
@@ -63,6 +62,29 @@ const loadProjectsToSidebar = () => {
     projectElement.addEventListener("click", (e) =>
       showProjectTodos(e.target.value),
     );
+
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.textContent = "X";
+    deleteProjectButton.style.display = "none";
+    deleteProjectButton.classList.add("inner-delete-button");
+
+    deleteProjectButton.addEventListener("click", () => {
+      if (
+        confirm(`Are you sure you want to delete this ${projectName} project?`)
+      ) {
+        deleteProject(projectName);
+      }
+    });
+
+    projectElement.appendChild(deleteProjectButton);
+    projectElement.addEventListener("mouseenter", () => {
+      if (projectName != "Home")
+        deleteProjectButton.style.display = "inline-block";
+    });
+
+    projectElement.addEventListener("mouseleave", () => {
+      deleteProjectButton.style.display = "none";
+    });
   }
   projectSection.appendChild(projectItems);
   sidebar.appendChild(projectSection);

@@ -113,6 +113,38 @@ p {
   transform: translateY(1px);
 }
 
+.inner-delete-button {
+  color: var(--danger-color);
+  background: transparent;
+  border: none;
+  width: auto !important;
+  padding: 0.25rem 0.5rem !important;
+  margin-left: auto;
+  font-weight: bold;
+  transition: var(--transition);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-delete-button:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+}
+
+#project-section li button {
+  padding-right: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sidebar button.inner-delete-button:hover {
+  background-color: rgba(231, 76, 60, 0.1);
+  border-color: transparent;
+}
 #project-section {
   margin-top: 1.5rem;
 }
@@ -123,7 +155,6 @@ p {
 
 #project-section li button {
   padding-left: 1rem;
-  border-left: 3px solid transparent;
 }
 
 #project-section li button:hover {
