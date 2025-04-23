@@ -1,10 +1,11 @@
+/* Form Components */
 #todo-form-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,31 +13,31 @@
   animation: fadeIn 0.25s ease-out;
 }
 
-/*   Modal container   */
+/* Modal container */
 #todo-form-modal {
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  width: 450px;
-  max-width: 90%;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  max-width: 95%;
   overflow: hidden;
   animation: slideIn 0.3s ease-out;
 }
 
-/*   Form styling   */
+/* Form styling */
 #todo-form {
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 4px;
+  margin-bottom: 1rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #495057;
+  color: var(--dark-color);
   font-size: 0.9rem;
 }
 
@@ -44,34 +45,32 @@
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--light-gray);
+  border-radius: var(--border-radius);
   font-size: 0.95rem;
-  box-sizing: border-box;
-  transition:
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  transition: var(--transition);
 }
 
 .form-group input:focus,
 .form-group textarea:focus,
 .form-group select:focus {
-  border-color: #80bdff;
+  border-color: var(--primary-color);
   outline: 0;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
 }
 
 .form-group textarea {
-  min-height: 60px;
-  resize: none;
+  min-height: 100px;
+  resize: vertical;
 }
 
-/* Date input with calendar icon   */
+/* Date input with calendar icon */
 .date-input-container {
   position: relative;
 }
-/*   Style for select dropdown   */
+
+/* Select Styling */
 .form-group select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23343a40' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -81,27 +80,30 @@
   padding-right: 36px;
 }
 
-/*   Action buttons   */
+/* Form Actions */
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--light-gray);
 }
 
 .cancel-btn,
 .submit-btn {
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
   font-size: 0.95rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: var(--transition);
 }
 
 .cancel-btn {
-  background-color: #f8f9fa;
-  border: 1px solid #ced4da;
-  color: #495057;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--light-gray);
+  color: var(--dark-color);
 }
 
 .cancel-btn:hover {
@@ -109,17 +111,16 @@
 }
 
 .submit-btn {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   border: none;
   color: white;
-  font-weight: 500;
 }
 
 .submit-btn:hover {
-  background-color: #0069d9;
+  background-color: var(--primary-hover);
 }
 
-/*   Animations   */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -140,19 +141,50 @@
   }
 }
 
-/*   Responsive adjustments   */
+/* Form Validation Styling */
+.form-group input:invalid,
+.form-group textarea:invalid,
+.form-group select:invalid {
+  border-color: var(--danger-color);
+}
+
+.form-group .error-message {
+  color: var(--danger-color);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+}
+
+/* Priority Selection Styling */
+.form-group select[name="priority"] option[value="high"] {
+  color: var(--danger-color);
+}
+
+.form-group select[name="priority"] option[value="medium"] {
+  color: var(--warning-color);
+}
+
+.form-group select[name="priority"] option[value="low"] {
+  color: var(--success-color);
+}
+
+/* Responsive Form Adjustments */
 @media (max-width: 576px) {
   #todo-form-modal {
     width: 95%;
   }
 
+  #todo-form {
+    padding: 1rem;
+  }
+
   .form-actions {
     flex-direction: column-reverse;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   .cancel-btn,
   .submit-btn {
     width: 100%;
+    padding: 0.75rem;
   }
 }
